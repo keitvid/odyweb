@@ -1,0 +1,25 @@
+{
+  "name": "metrics_frontend",
+  "description": "nope",
+  "main": "nope",
+  "authors": [
+    "A.Gromov"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "jquery": "*",
+    "handlebars": "*",
+    "bootstrap": "*",
+    "requirejs": "*",
+    "requirejs-text": "*"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

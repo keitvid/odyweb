@@ -1,0 +1,30 @@
+<div class="right-toolbox">
+    <h4>Runs</h4>
+    <ul>
+        {{#each tables}}
+            <li>
+                <a href="#" class="table-navi" data-table="{{table}}">
+                    <i class="glyphicon glyphicon-list-alt"></i> {{table}}
+                </a>
+            </li>
+        {{/each}}
+    </ul>
+</div>
+<div class="right-toolbox">
+    {{#each tables}}
+        {{#if columns}}
+        <div class="columns-toolbox" data-table="{{table}}">
+            <h4>Columns</h4>
+            <ul>
+                {{#each columns}}
+                    <li>
+                        <a href="#" class="table-column-navi" data-column="{{name}}">
+                            <i class="glyphicon glyphicon-tag"></i> {{name}}
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/if}}
+    {{/each}}
+</div>

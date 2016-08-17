@@ -1,0 +1,92 @@
+{{#each tables}}
+    <p>
+    <p id="tableName">{{name}}</p>
+    <p id="contents">
+    {{#if rows}}
+        <table id="tableMetricsTable">
+            <tr>
+                <td id="tableMetricsLabel">Generate Time:</td>
+                <td id="tableMetricsValue">{{generate_time}}</td>
+            </tr>
+
+            <tr>
+                <td id="tableMetricsLabel">Rows:</td>
+                <td id="tableMetricsValue">{{rows}}</td>
+            </tr>
+            <tr>
+                <td id="tableMetricsLabel">Unique Rows:</td>
+                <td id="tableMetricsValue">{{unique_rows}}</td>
+            </tr>
+            <tr>
+                <td id="tableMetricsLabel">Has Duplicates:</td>
+                <td id="tableMetricsValue">{{has_duplicates}}</td>
+            </tr>
+        </table>
+        <table id="columnsTable">
+            <tr>
+                <th>Column Name</th>
+                <th>Data</th>
+                <th>Metrics</th>
+            </tr>
+            {{#each columns}}
+                <tr>
+                    <td id="fieldName">{{name}}</td>
+                    {{#if sample}}
+                        <td id="sampleNull">NULL</td>
+                        <td></td>
+                    {{else}}
+                        <td>
+                            <table id="sampleDataTable">
+                                {{#each ../sample}}
+                                    <tr>
+                                        <td id="sampleRegular">{{.}}</td>
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </td>
+                        <td>
+                            <table id="statsTable">
+                                <tr>
+                                    <td id="statsTableLable">Nulls:</td>
+                                    <td id="statsTableValue">{{../nulls}}</td>
+                                </tr>
+                                <tr>
+                                    <td id="statsTableLable">Unique Values:</td>
+                                    <td id="statsTableValue">{{../unique}}</td>
+                                </tr>
+                                <tr>
+                                    <td id="statsTableLable">Nulls Rate:</td>
+                                    <td id="statsTableValue">{{../nulls_rate}}%</td>
+                                </tr>
+                                <tr>
+                                    <td id="statsTableLable">Unique Values Rate:</td>
+                                    <td id="statsTableValue">{{../unique_rate}}%</td>
+                                </tr>
+                                <tr>
+                                    <td id="statsTableLable">Has Nulls:</td>
+                                    <td id="statsTableValue">{{../has_nulls}}</td>
+                                </tr>
+                                <tr>
+                                    <td id="statsTableLable">Has Duplicates:</td>
+                                    <td id="statsTableValue">{{../has_duplicates}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    {{/if}}
+                </tr>
+            {{/each}}
+        </table>
+    {{else}}
+        <table id="tableMetricsTable">
+            <tr>
+                <td id="tableMetricsLabel">Generate Time:</td>
+                <td id="tableMetricsValue">{{generate_time}}</td>
+            </tr>
+        </table>
+        <p id="tableNotPoplulated">Not Populated</p>
+    {{/if}}
+
+
+    </p>
+    </p>
+{{/each}}

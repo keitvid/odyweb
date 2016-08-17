@@ -1,0 +1,159 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+html * {
+  font-family: calibri
+}
+
+#tableName {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#contents {
+  padding-left: 24px;
+}
+
+#tableNotPoplulated {
+  font-size: 24px;
+  font-weight: bold;
+  color: #aa6666
+}
+
+#tableMetricsTable {
+  border: none;
+  padding: 2px
+}
+
+#tableMetricsTable td {
+  padding-left: 0px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 0px
+}
+
+#tableMetricsLabel {
+  font-size: 16px;
+  color: #666666
+}
+
+#tableMetricsValue {
+  font-size: 16px;
+  color: #000000;
+  padding-left: 4px
+}
+
+#tableMetric {
+  padding: 0px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#columnsTable {
+  margin-top: 24px;
+  border: 1px solid #cccccc;
+  border-collapse: collapse;
+}
+
+#columnsTable {
+  td, th {
+    padding: 8px;
+    border: 1px solid #cccccc;
+
+  }
+
+  th {
+    text-align: center;
+  }
+} 
+
+#columnsTable th {
+  background-color: #444444;
+  font-size: 18px;
+  color: #aaaaaa
+}
+
+#fieldName {
+  font-size: 20px;
+  color: #444444
+}
+
+#sampleNull {
+  font-weight: bold;
+  color: #aa6666
+}
+
+#sampleUnique {
+  font-weight: bold
+}
+
+#sampleEnum {
+  font-weight: bold
+}
+
+#sampleDataTable td {
+  border: none;
+  padding-left: 0px;
+  padding-top: 2px;
+  padding-bottom: 2px
+}
+
+#statsTable td {
+  border: none;
+  padding-left: 2px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px
+}
+
+#statsTableLable {
+  color: #666666
+}
+
+#statsTableValue {
+  font-weight: normal;
+  padding: 0px
+}
+
+.content-metrics {
+  overflow-y: scroll;
+  height: 600px;
+}
+
+.table-metrics {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+
+.content-navi {
+  .right-toolbox {
+    max-height: 450px;
+    overflow-y: auto;
+  }
+
+  ul {
+    padding-left: 0px;
+  }
+  li {
+    margin-left: 0px;
+    list-style-type: none;
+  }
+
+  .columns-toolbox {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}
