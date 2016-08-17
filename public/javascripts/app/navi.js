@@ -8,7 +8,7 @@ define([
 ], function($, hbs, tpl) {
     return {
         init: function() {
-            this.render([{title: "corrona_cdm"}]);
+            this.render([{title: "some_random_metrics"}]);
         },
 
         render: function(list) {
