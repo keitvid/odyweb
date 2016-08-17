@@ -1,0 +1,76 @@
+{{#each tables}}
+    <div class="table-metrics" data-table="{{table}}">
+        <h2>{{table}}</h2>
+        <div class="table-stats">
+            <table class="table table-striped table-hover">
+                <tbody>
+                    <tr>
+                        <td>Generate Time:</td>
+                        <td>{{generate_time}}</td>
+                    </tr>
+                    {{#if rows}}
+                        <tr>
+                            <td>Rows:</td>
+                            <td>{{rows}}</td>
+                        </tr>
+                        <tr>
+                            <td>Unique Rows:</td>
+                            <td>{{unique_rows}}</td>
+                        </tr>
+                        <tr>
+                            <td>Has Duplicates:</td>
+                            <td>{{has_duplicates}}</td>
+                        </tr>
+                    {{/if}}
+                </tbody>
+            </table>
+        </div>
+        {{#unless rows}}
+            <p id="tableNotPoplulated">Not Populated</p>
+        {{/unless}}
+        {{#each columns}}
+            <div class="column-stats" data-column="{{name}}">
+                <h3>{{name}}</h3>
+                <div class="container-fluid">
+                    <div class="row">
+                        {{#if metrics}}
+                            <div class="col-md-6">
+                                <h4>Metrics</h4>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>Value</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each metrics}}
+                                        <tr>
+                                            <td>{{title}}</td>
+                                            <td>{{value}}</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {{/if}}
+                        <div class="col-md-6">
+                            <h4>Sample</h4>
+                            {{#if sample}}
+                                <ul>
+                                    {{#each sample}}
+                                        <li>{{.}}</li>
+                                    {{/each}}
+                                </ul>
+                            {{else}}
+                                NULL
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        {{/each}}
+    </div>
+{{/each}}

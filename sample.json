@@ -1,0 +1,309 @@
+[
+  {
+    "table": "procedure_occurrence",
+    "generate_time": "2016-07-19 17:39:50.182491"
+  },
+  {
+    "table": "visit_occurrence",
+    "generate_time": "2016-07-19 17:39:56.964769",
+    "rows":	72395,
+    "unique_rows": 72395,
+    "has_duplicates": false,
+    "columns": [
+      {
+        "name": "visit_occurrence_id",
+        "sample": [1, 145, 289, 433, 577],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 72395
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "100%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "False"
+          }
+        ]
+      },
+      {
+        "name": "person_id",
+        "sample": [31, 45, 102, 106, 182],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 9180
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "12%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "True"
+          }
+        ]
+      },
+      {
+        "name": "visit_start_date",
+        "sample": [
+          "2015-01-07",
+          "2014-08-21",
+          "2014-04-23",
+          "2014-01-27",
+          "2012-09-12"
+        ],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 2054
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "2%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "True"
+          }
+        ]
+      },
+      {
+        "name": "visit_end_date",
+        "sample": [
+          "2012-03-30",
+          "2015-12-10",
+          "2014-05-28",
+          "2015-03-10",
+          "2015-01-13"
+        ],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 2054
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "2%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "True"
+          }
+        ]
+      },
+      {
+        "name": "place_of_service_concept_id"
+      },
+      {
+        "name": "care_site_id"
+      },
+      {
+        "name": "place_of_service_source_value"
+      }
+    ]
+  },
+  {
+    "table": "concept_ancestor",
+    "generate_time": "2016-07-19 17:38:28.347098",
+    "rows":	63231932,
+    "unique_rows": 63231932,
+    "has_duplicates": false,
+    "columns": [
+      {
+        "name": "ancestor_concept_id",
+        "sample": [
+          36302170,
+          4350085,
+          36502202,
+          4331211,
+          4340569
+        ],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 1341959
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "2%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "True"
+          }
+        ]
+      },
+      {
+        "name": "descendant_concept_id",
+        "sample": [
+          4311766,
+          45769021,
+          44652992,
+          1876062,
+          4159683
+        ],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 1341959
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "2%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "True"
+          }
+        ]
+      },
+      {
+        "name": "max_levels_of_separation",
+        "sample": [
+          10,
+          11,
+          8,
+          5,
+          11
+        ],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 25
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "True"
+          }
+        ]
+      },
+      {
+        "name": "min_levels_of_separation",
+        "sample": [
+          8,
+          8,
+          3,
+          4,
+          6
+        ],
+        "metrics": [
+          {
+            "title": "Nulls",
+            "value": 0
+          },
+          {
+            "title": "Unique",
+            "value": 21
+          },
+          {
+            "title": "Nulls Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Unique Rate",
+            "value": "0%"
+          },
+          {
+            "title": "Has Nulls",
+            "value": "False"
+          },
+          {
+            "title": "Has Duplicates",
+            "value": "True"
+          }
+        ]
+      }
+    ]
+  }
+]
