@@ -2,14 +2,14 @@
  * Created by AGromov on 19.08.2016.
  */
 'use strict';
-var settingsApi = require("./settingsApi");
+var settingsApi = require("./settingsApi"),
+    calculationApi = require("./calculationApi");
 
 class Api {
     constructor() {
         this.handlers = {};
         this.handlers.settings = settingsApi;
-
-
+        this.handlers.calc = calculationApi;
     }
 
     call(method) {

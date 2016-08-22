@@ -8,6 +8,7 @@ var api = require('../controllers/api');
 
 /* GET users listing. */
 router.get('/metrics/:schema', function(req, res) {
+    
     res.send(sample);
 });
 
@@ -39,6 +40,14 @@ router.delete('/settings/:oid', function(req, res) {
     }).catch((err) => {
         console.error(err);
     });
+});
+
+router.get('/calc/:oid', function(req, res) {
+    api.call('calc/calculate', req.params.oid).then((x) => {
+        res.send(x);
+    }).catch((err) => {
+        console.error(err);
+    })
 });
 
 module.exports = router;

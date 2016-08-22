@@ -20,10 +20,12 @@ class MetricsBase {
         this.value = undefined;
     }
 
-    doQuery(query) {
+    doQuery(sqlQuery) {
         return new Promise((resolve, reject) => {
-            var query = this.connection.query(query);
+            this.lastSql = sqlQuery;
+            var query = this.connection.query(sqlQuery);
             query.on("error", (err) => {
+                console.error(err);
                 reject(err);
             });
             var output = 0;
@@ -36,7 +38,7 @@ class MetricsBase {
             });
             query.on("end", () => {
                 resolve(output);
-            })
+            });
         });
     }
 }
