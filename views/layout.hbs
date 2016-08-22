@@ -3,10 +3,14 @@
   <head>
     <title>{{title}}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-      <link rel="stylesheet" href="/javascripts/vendor/bootstrap/less/bootstrap.css">
-      <script data-main="/javascripts/app/main" src="javascripts/vendor/requirejs/require.js"></script>
+    <link rel="stylesheet" href="/javascripts/vendor/bootstrap/less/bootstrap.css">
+    <script src="/javascripts/vendor/fetch/fetch.js"></script>
+    <script data-main="/javascripts/app/main" src="javascripts/vendor/requirejs/require.js"></script>
   </head>
   <body>
-    {{{body}}}
+  <div class="app-container">
+      {{{body}}}
+  </div>
+
   </body>
 </html>
