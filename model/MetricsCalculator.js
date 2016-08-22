@@ -4,6 +4,7 @@
 'use strict';
 var pg = require("pg");
 
+
 class ColumnStructure {
 
 }
@@ -15,11 +16,8 @@ class TableStructure {
 
         this.columns = [];
 
-        this.metrcis = [
-            {
-                title: "Rows",
-                
-            }
+        this.metrics = [
+
         ];
     }
 

@@ -4,18 +4,17 @@
 'use strict';
 var MetricsBase = require("./MetricsBase");
 
-class TableRows extends MetricsBase {
+class UniqueRows extends MetricsBase {
 
     constructor(connection, table, field) {
         super(connection, table, field);
-        this.title = "Rows";
+        this.title = "Unique Rows";
     }
 
     calculate() {
         this.outFieldName = "cnt";
-        return super.doQuery(`SELECT COUNT(*) as cnt FROM ${this.table}`);
+        return super.doQuery(`SELECT count(distinct(*)) FROM ${this.table}`);
     }
 }
 
-
-module.exports = TableRows;
+module.exports = UniqueRows;

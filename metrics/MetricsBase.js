@@ -17,6 +17,27 @@ class MetricsBase {
         this.table = table;
         this.field = field;
         this.connection = connection;
+        this.value = undefined;
+    }
+
+    doQuery(query) {
+        return new Promise((resolve, reject) => {
+            var query = this.connection.query(query);
+            query.on("error", (err) => {
+                reject(err);
+            });
+            var output = 0;
+            query.on("row", (data) => {
+                if(this.outFieldName) {
+                    data = data[this.outFieldName];
+                }
+                this.value = data;
+                resolve(this.value);
+            });
+            query.on("end", () => {
+                resolve(output);
+            })
+        });
     }
 }
 
