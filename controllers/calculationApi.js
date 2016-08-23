@@ -9,30 +9,35 @@ var MetricsEntity = require("../model/MetricsEntity"),
 
 
 class calculationApi {
-    calculate(settingsId) {
+    calculate(settingsId, pwd) {
         var metrics = null;
         return MetricsEntity.findOne({_id: settingsId}).exec().then((entity) => {
             entity.status = "Calculating";
+            entity.password = pwd;
             metrics = entity;
-            setTimeout(() => {
-                var calc = new Calc(metrics);
-                calc.calculate().then((data) => {
-                    metrics.metrics = data;
-                    metrics.status = "Done";
-                    return metrics.save();
+            return entity.save().then((entity) => {
+                setTimeout(() => {
+                    var calc = new Calc(metrics);
+                    calc.calculate().then((data) => {
+                        metrics.metrics = data;
+                        metrics.status = "Done";
+                        return metrics.save();
+                    }).catch((err) => {
+                        metrics.metrics = null;
+                        metrics.status = `Error: ${err.message}`;
+                        metrics.save();
+                        return false;
+                    });
                 });
+
+                return entity;
             });
-            return entity.save();
         });
     }
 
     read(settingsId) {
         return MetricsEntity.findOne({_id: settingsId}).exec().then((entity) => {
-            if(!entity.metrics) {
-                return this.calculate(settingsId)
-            } else {
-                return entity;
-            }
+            return entity;
         });
     }
 }

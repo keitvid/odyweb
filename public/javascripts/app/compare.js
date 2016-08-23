@@ -11,7 +11,7 @@ define([
     storage,
     is_null_table,
     field_list,
-    is_null_field,
+    is_null_field
 ) {
     return {
         oidsList: [],

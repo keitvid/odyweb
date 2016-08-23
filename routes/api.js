@@ -39,7 +39,7 @@ router.delete('/settings/:oid', function(req, res) {
 });
 
 router.post('/calc/:oid', function(req, res) {
-    api.call('calc/calculate', req.params.oid).then((x) => {
+    api.call('calc/calculate', req.params.oid, req.body.pwd).then((x) => {
         res.send(x);
     }).catch((err) => {
         console.error(err);

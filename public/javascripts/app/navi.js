@@ -4,17 +4,21 @@
 define([
     "jquery",
     "handlebars",
-    "app/settings-popover",
+    "app/popovers/settings-popover",
+    "app/popovers/password-popover",
     "util/post-json",
     "app/storage",
     "app/compare",
     "text!view/menu.hbs"
-], function($, hbs, settingsPopover, postJson, storage, compare, tpl) {
+], function($, hbs, settingsPopover, passwordPopover, postJson, storage, compare, tpl) {
     return {
         $body: $,
         itemList: {},
         init: function() {
             this.refresh();
+            setInterval(() => {
+                this.refresh();
+            }, 5000);
         },
 
         refresh: function() {
@@ -90,7 +94,10 @@ define([
 
         refreshMetrics: function(evt) {
             var oid = evt.currentTarget.dataset.oid;
-            postJson(`/api/calc/${oid}`).then(() => {
+
+            passwordPopover.show().then((pwd) => {
+                return postJson(`/api/calc/${oid}`, {pwd: pwd});
+            }).then(() => {
                 this.refresh();
             });
         },
