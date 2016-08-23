@@ -114,7 +114,7 @@ define([
             settingsPopover.show(data).then((data) => {
                 this.refresh();
             }).catch((err) => {
-                alert(err);
+                //alert(err);
             });
         }
     }
