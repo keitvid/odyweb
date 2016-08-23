@@ -34,6 +34,11 @@ define([
         },
 
         render: function(list) {
+            var oidsToCheck = [];
+            $(".chk-compare:checked").each((idx, item) => {
+                oidsToCheck.push(item.dataset.oid);
+            });
+
             list = list.map((item) => {
                 if(!item.status) {
                     item.status = "Not calculated";
@@ -44,6 +49,11 @@ define([
 
             this.$body = $(hbs.compile(tpl)({items: list}));
             $(".left-navi").html(this.$body);
+
+            oidsToCheck.forEach((item) => {
+                $(`.chk-compare[data-oid="${item}"]`).prop("checked", true);
+            });
+
             this.staticEventHandlers();
         },
 

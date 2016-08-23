@@ -1,7 +1,7 @@
 /**
  * Created by AGromov on 23.08.2016.
  */
-
+'use strict';
 define([
     "app/storage",
     "app/comparators/is_null_table",
@@ -27,11 +27,11 @@ define([
             this.cpmList = [];
             this.titles = [];
             this.oidsList.forEach((item) => {
-                var data = data.filter((dataItem) => {
+                let metric = data.filter((dataItem) => {
                     return dataItem._id == item;
                 })[0];
-                this.titles.push(data.title);
-                this.cpmList.push(this.prepareList(data.metrics));
+                this.titles.push(metric.title);
+                this.cpmList.push(this.prepareList(metric.metrics));
             });
 
             // Prepare keys
@@ -47,17 +47,23 @@ define([
                     this.keysList[key] = 1;
                 }
             }
+
+            this.doTableCompare();
         },
 
         doTableCompare: function() {
+            var report = [];
             for(var key in this.keysList) {
                 if(!this.keysList.hasOwnProperty(key)) continue;
 
                 var tables = [];
                 var reportItem = {
                     table: key,
-                    validations: []
+                    validations: [],
+                    columns: []
                 };
+
+                report.push(reportItem);
 
                 this.cpmList.forEach((item, idx) => {
                     var t = item[key];
@@ -69,7 +75,52 @@ define([
                     }
                     tables.push(t);
                 });
+                this.tableComparators.forEach((comparator) => {
+                    reportItem.validations.push({
+                        message: comparator.validationMessage,
+                        result: comparator.compare(tables)
+                    });
+                });
+
+                reportItem.columns = this.doColumnCompare(tables);
             }
+
+            console.dir(report);
+        },
+
+        doColumnCompare: function(tables) {
+            var cols = {};
+            tables.forEach((table, t_idx) => {
+                table.columns.forEach((col) => {
+                    if(!cols[col.name]) {
+                        cols[col.name] = [];
+                    }
+                    cols[col.name][t_idx] = col;
+                });
+            });
+
+            var colsReport = [];
+
+            for(let key in cols) {
+
+                if(!cols.hasOwnProperty(key)) {
+                    continue;
+                }
+
+                var colsReportItem = {
+                    name: key,
+                    validations: this.fieldComparators.map((compare) => {
+                        return {
+                            message: compare.validationMessage,
+                            result: compare.compare(cols[key])
+                        }
+                    })
+                };
+
+                colsReport.push(colsReportItem);
+            }
+
+            return colsReport;
         },
 
         changeComparison: function(oid) {
@@ -83,6 +134,10 @@ define([
             }
             if(!found) {
                 this.oidsList.push(oid);
+            }
+
+            if(this.oidsList.length > 1) {
+                this.doCompare();
             }
         },
 
