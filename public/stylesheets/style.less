@@ -1,3 +1,12 @@
+@import 'curtain';
+@import 'popover';
+
+@import "../javascripts/vendor/bootstrap/less/variables";
+@import "../javascripts/vendor/bootstrap/less/mixins";
+
+@import "../javascripts/vendor/bootstrap/less/buttons";
+@import "../javascripts/vendor/bootstrap/less/glyphicons";
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -155,5 +164,16 @@ html * {
     &.active {
       display: block;
     }
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.left-navi {
+  .metric-status {
+    color: #555;
+    font-size: 10px;
   }
 }

@@ -5,11 +5,12 @@
 define([
     "jquery",
     "handlebars",
+    "app/storage",
     "text!view/content.hbs",
     "text!view/content-default.hbs",
     "text!view/metrics.hbs",
     "text!view/metrics-navi.hbs"
-], function($, hbs, content, contentDefault, metricsTpl, naviTpl) {
+], function($, hbs, storage, content, contentDefault, metricsTpl, naviTpl) {
     return {
         layout: hbs.compile(content),
         metricsTpl: hbs.compile(metricsTpl),
@@ -18,32 +19,50 @@ define([
 
         },
 
-        setSchema: function(schema) {
+        setSchema: function(schema, title) {
             if(schema[0] == "#") {
                 schema = schema.substr(1);
             }
             this.schema = schema;
             var self = this;
-            if(!schema) {
-                this.render(contentDefault);
-            } else {
-                $.get("/api/metrics/" + schema + "/", function(data) {
-                    self.render(data);
-                });
+            var data = storage.getState("metrics_list");
+            var renderingData = null;
+            if(data) {
+                renderingData = data.filter((item) => {
+                    return item._id == schema;
+                })[0];
+                if(renderingData) {
+                    renderingData = renderingData.metrics;
+                }
             }
+            if(!renderingData) {
+                if(!schema) {
+                    renderingData = contentDefault;
+                } else {
+                    $.get("/api/metrics/" + schema + "/", function(data) {
+                        renderingData = data.metrics;
+                        self.render(renderingData, title);
+                    });
+                }
+            }
+            self.render(renderingData, title);
         },
 
-        render: function(data) {
+        render: function(data, title) {
             var content = contentDefault;
             var navi = "";
             if(data) {
+                data = data.map((item) => {
+                    item.rows = parseInt(item.rows);
+                    return item;
+                });
                 data = {tables: data};
                 content = this.metricsTpl(data);
                 navi = this.naviTpl(data);
             }
             $(".right-content").html(this.layout({
                 content: content,
-                schema: this.schema ? this.schema : "unknown",
+                schema: this.schema ? `${title} (${this.schema})` : "unknown",
                 navi: navi
             }));
             this.bindEvents();
