@@ -5,8 +5,10 @@ define([
     "jquery",
     "handlebars",
     "app/settings-popover",
+    "util/post-json",
+    "app/storage",
     "text!view/menu.hbs"
-], function($, hbs, settingsPopover, tpl) {
+], function($, hbs, settingsPopover, postJson, storage, tpl) {
     return {
         $body: $,
         itemList: {},
@@ -21,11 +23,20 @@ define([
                 data.forEach((item) => {
                     this.itemList[item._id] = item;
                 });
+                storage.setState("metrics_list", data);
                 this.render(data);
             });
         },
 
         render: function(list) {
+            list = list.map((item) => {
+                if(!item.status) {
+                    item.status = "Not calculated";
+                }
+
+                return item;
+            });
+
             this.$body = $(hbs.compile(tpl)({items: list}));
             $(".left-navi").html(this.$body);
             this.staticEventHandlers();
@@ -42,6 +53,10 @@ define([
 
             this.$body.on("click", ".btnEditMetric", (evt) => {
                 this.editMetrics(evt);
+            });
+
+            this.$body.on("click", ".btnRefreshMetric", (evt) => {
+                this.refreshMetrics(evt);
             });
         },
 
@@ -61,6 +76,13 @@ define([
             }).then(() => {
                 this.refresh();
             });
+        },
+
+        refreshMetrics: function(evt) {
+            var oid = evt.currentTarget.dataset.oid;
+            postJson(`/api/calc/${oid}`).then(() => {
+                this.refresh();
+            })
         },
 
         showPopover: function(evt, oid) {

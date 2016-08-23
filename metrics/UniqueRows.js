@@ -13,7 +13,8 @@ class UniqueRows extends MetricsBase {
 
     calculate() {
         this.outFieldName = "cnt";
-        return super.doQuery(`SELECT COUNT(*) FROM (SELECT distinct * FROM ${this.table})`);
+
+        return super.doQuery(`SELECT COUNT(*) as cnt FROM (SELECT distinct * FROM ${this.table})`);
     }
 }
 

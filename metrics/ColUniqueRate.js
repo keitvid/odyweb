@@ -34,8 +34,7 @@ class ColUniqueRate extends MetricsBase {
             total = total[0].value;
             unique = unique[0].value;
 
-            this.value = total ? unique/total : 0;
-            this.value = parseInt(this.value * 100) + "%";
+            this.value = total > 0 ? (parseInt(unique/total * 100) + "%") : 0;
             resolve(this.value);
         });
     }

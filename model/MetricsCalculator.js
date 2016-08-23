@@ -16,12 +16,15 @@ var TableRows = require("../metrics/TableRows"),
 
 
 class ColumnStructure {
+
     constructor(connection, field, tableName, schema, misc) {
         this.connection = connection;
         this.field = field;
         this.tableName = tableName;
         this.schema = schema;
         this.misc = misc;
+        this.sampleCount = 6;
+        this.sample = [];
 
         this.metrics = [
             new ColNulls(this.connection, `${this.schema}.${this.tableName}`, this.field),
@@ -33,7 +36,7 @@ class ColumnStructure {
         ];
     }
 
-    calculate() {
+    calculateMetrics() {
         return new Promise((resolve, reject) => {
             this.startTime = new Date();
             console.log(this.field + "!!!");
@@ -58,10 +61,36 @@ class ColumnStructure {
         });
     }
 
+    calculate() {
+        return Promise.all([
+            this.calculateMetrics(),
+            this.valueSample()
+        ]);
+    }
+
+    valueSample() {
+        return new Promise((resolve, reject) => {
+            var q = this.connection.query(`SELECT ${this.field} as fld FROM ${this.schema}.${this.tableName} ORDER BY RANDOM() LIMIT ${this.sampleCount}`);
+            this.sample = [];
+            q.on("row", (data) => {
+                this.sample.push(data["fld"] === null ? "NULL" : `"${data["fld"]}"`);
+            });
+            q.on("end", () => {
+                if(this.sample.length == 1 && this.sample[0] == NULL) {
+                    this.sample = [];
+                }
+                resolve();
+            });
+            q.on("error", (err) => {
+                reject(err);
+            });
+        });
+    }
+
     serialize() {
         return {
             name: this.field,
-            sample: [],
+            sample: this.sample,
             metrics: this.metrics.map((item) => {
                 return {
                     title: item.title,

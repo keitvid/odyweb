@@ -12,7 +12,8 @@ var metricsEntitySchema = new Schema({
     password: String,
     database: String,
     schemaName: String,
-    metrics: [Schema.Types.Mixed]
+    metrics: [Schema.Types.Mixed],
+    status: String
 });
 
 var metricsEntity = mongoose.model("MetricsEntity", metricsEntitySchema);

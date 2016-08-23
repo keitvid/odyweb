@@ -13,7 +13,9 @@ class TableRows extends MetricsBase {
 
     calculate() {
         this.outFieldName = "cnt";
-        return super.doQuery(`SELECT COUNT(*) as cnt FROM ${this.table}`);
+        return super.doQuery(`SELECT COUNT(*) as cnt FROM ${this.table}`).then((value) => {
+            return parseInt(value);
+        });
     }
 }
 

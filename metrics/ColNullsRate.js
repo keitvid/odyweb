@@ -31,11 +31,10 @@ class ColNullsRate extends MetricsBase {
                 reject("Prerequisities not fulfilled");
                 return;
             }
-            total = total[0].value;
-            nulls = nulls[0].value;
+            total = parseInt(total[0].value);
+            nulls = parseInt(nulls[0].value);
 
-            this.value = total ? nulls/total : 0;
-            this.value = parseInt(this.value * 100) + "%";
+            this.value = total > 0 ? parseInt(nulls/total * 100) + "%" : 0;
             resolve(this.value);
         })
     }

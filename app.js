@@ -11,6 +11,7 @@ var api = require('./routes/api');
 var mongoose = require("mongoose");
 var config = require("./config.json");
 mongoose.connect(`mongodb://localhost/${config.mongo.db}`);
+mongoose.Promise = global.Promise;
 var app = express();
 
 // view engine setup
