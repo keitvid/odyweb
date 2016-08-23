@@ -7,8 +7,9 @@ define([
     "app/settings-popover",
     "util/post-json",
     "app/storage",
+    "app/compare",
     "text!view/menu.hbs"
-], function($, hbs, settingsPopover, postJson, storage, tpl) {
+], function($, hbs, settingsPopover, postJson, storage, compare, tpl) {
     return {
         $body: $,
         itemList: {},
@@ -58,6 +59,15 @@ define([
             this.$body.on("click", ".btnRefreshMetric", (evt) => {
                 this.refreshMetrics(evt);
             });
+
+            this.$body.on("change", ".chk-compare", (evt) => {
+                this.manageComparison(evt);
+            });
+        },
+
+        manageComparison: function(evt) {
+            var oid = evt.target.dataset.oid;
+            compare.changeComparison(oid);
         },
 
         editMetrics: function(evt) {
@@ -82,7 +92,7 @@ define([
             var oid = evt.currentTarget.dataset.oid;
             postJson(`/api/calc/${oid}`).then(() => {
                 this.refresh();
-            })
+            });
         },
 
         showPopover: function(evt, oid) {

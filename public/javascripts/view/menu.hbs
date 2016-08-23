@@ -2,6 +2,7 @@
 <ul>
     {{#each items}}
         <li>
+            <input type="checkbox" class="chk-compare" data-oid="{{_id}}">
             <a href="#{{_id}}/{{title}}">{{title}}</a>
             <span class="pointer btnEditMetric" data-oid="{{_id}}" title="Change Settings"><i class="glyphicon glyphicon-edit"></i></span>
             <span class="pointer btnDeleteMetric" data-oid="{{_id}}" title="Add new"><i class="glyphicon glyphicon-remove"></i></span>
@@ -10,3 +11,6 @@
         </li>
     {{/each}}
 </ul>
+<div class="compare">
+
+</div>
