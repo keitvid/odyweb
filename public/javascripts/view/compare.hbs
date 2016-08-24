@@ -4,8 +4,11 @@
         Base metric: <strong>{{baseMetric}}</strong><br />
         Metrics list: <ul>{{#each metrics}}<li>{{.}}</li>{{/each}}</ul>
     </div>
+    <div>
+        <label><input type="checkbox" class="hide_success">Hide success</label>
+    </div>
     {{#each table}}
-        <div>
+        <div class="compare-table">
             <h3>Table: {{table}}</h3>
             <table class="table table-bordered table-striped">
                 <thead>

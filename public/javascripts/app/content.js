@@ -81,12 +81,35 @@ define([
 
         renderComparisonFinish: function() {
             var data = compare.compareResult;
-
-            $(".right-content").html(this.compareTpl({
+            var $content = $(this.compareTpl({
                 table: data,
                 baseMetric: compare.titles[0],
                 metrics: compare.titles
             }));
+
+            $(".right-content").html($content);
+
+            $(".right-content .hide_success").change((evt) => {
+                var target = evt.currentTarget;
+                if($(target).prop("checked")) {
+                    $content.find(".success").hide();
+                    $content.find(".compare-columns").each((idx, item) => {
+                        var $this = $(item);
+                        if(!$this.find(".danger, .warning").size()) {
+                            $this.hide();
+                        }
+                    });
+
+                    $content.find(".compare-table").each((idx, item) => {
+                        var $this = $(item);
+                        if(!$this.find(".danger, .warning").size()) {
+                            $this.hide();
+                        }
+                    });
+                } else {
+                    $content.find(".success, table, .compare-table, .compare-columns").show();
+                }
+            });
         },
 
         render: function(data, title) {
