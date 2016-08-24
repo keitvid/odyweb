@@ -4,21 +4,20 @@
 'use strict';
 define([
     "app/storage",
-    "app/comparators/is_null_table",
-    "app/comparators/field_list",
-    "app/comparators/is_null_field"
+    
+    "app/comparators/table-comparators",
+    "app/comparators/field-comparators"
 ], function(
     storage,
-    is_null_table,
-    field_list,
-    is_null_field
+    tableComparators,
+    fieldComparators
 ) {
     return {
         oidsList: [],
         cpmList: [],
         keysList: [],
-        tableComparators: [is_null_table, field_list],
-        fieldComparators: [is_null_field],
+        tableComparators: tableComparators,
+        fieldComparators: fieldComparators,
         report: [],
         titles: [],
 
@@ -86,6 +85,7 @@ define([
             }
 
             console.dir(report);
+            return report;
         },
 
         doColumnCompare: function(tables) {
