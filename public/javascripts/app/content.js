@@ -6,15 +6,18 @@ define([
     "jquery",
     "handlebars",
     "app/storage",
+    "app/compare",
     "text!view/content.hbs",
     "text!view/content-default.hbs",
     "text!view/metrics.hbs",
-    "text!view/metrics-navi.hbs"
-], function($, hbs, storage, content, contentDefault, metricsTpl, naviTpl) {
+    "text!view/metrics-navi.hbs",
+    "text!view/compare.hbs"
+], function($, hbs, storage, compare, content, contentDefault, metricsTpl, naviTpl, compareTpl) {
     return {
         layout: hbs.compile(content),
         metricsTpl: hbs.compile(metricsTpl),
         naviTpl: hbs.compile(naviTpl),
+        compareTpl: hbs.compile(compareTpl),
         init: function() {
 
         },
@@ -23,6 +26,11 @@ define([
             if(schema[0] == "#") {
                 schema = schema.substr(1);
             }
+            if(schema == "compare") {
+                this.renderComparison();
+                return;
+            }
+            
             this.schema = schema;
             var self = this;
             var data = storage.getState("metrics_list");
@@ -46,6 +54,39 @@ define([
                 }
             }
             self.render(renderingData, title);
+        },
+
+        renderComparison: function() {
+
+            if(!compare.oidsList.length) {
+                // wait until we got data
+                var wait = () => {
+                    var state = storage.getState("metrics_list");
+                    if(state) {
+                        var oids = window.location.hash.split("/");
+                        for(let i = 1; i < oids.length; i++) {
+                            compare.changeComparison(oids[i]);
+                        }
+                        this.renderComparisonFinish();
+                    } else {
+                        setTimeout(wait, 100);
+                    }
+                };
+                wait();
+
+            }
+
+            this.renderComparisonFinish();
+        },
+
+        renderComparisonFinish: function() {
+            var data = compare.compareResult;
+
+            $(".right-content").html(this.compareTpl({
+                table: data,
+                baseMetric: compare.titles[0],
+                metrics: compare.titles
+            }));
         },
 
         render: function(data, title) {

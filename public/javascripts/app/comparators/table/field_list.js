@@ -4,6 +4,7 @@
 define([], function() {
     return {
         validationMessage: "Table structure differs",
+        severity: "danger",
         compare: function(tables) {
             var basicTable = tables[0],
                 result = true,

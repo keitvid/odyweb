@@ -35,6 +35,9 @@ define([
 
         render: function(list) {
             var oidsToCheck = [];
+            var hash = window.location.hash.split("/");
+
+
             $(".chk-compare:checked").each((idx, item) => {
                 oidsToCheck.push(item.dataset.oid);
             });
@@ -49,10 +52,16 @@ define([
 
             this.$body = $(hbs.compile(tpl)({items: list}));
             $(".left-navi").html(this.$body);
+            if(hash[0] == "#compare") {
+                for(let i = 0; i < hash.length; i++) {
+                    $(`.chk-compare[data-oid="${hash[i]}"]`).prop("checked", true);
+                }
+            } else {
+                oidsToCheck.forEach((item) => {
+                    $(`.chk-compare[data-oid="${item}"]`).prop("checked", true);
+                });
+            }
 
-            oidsToCheck.forEach((item) => {
-                $(`.chk-compare[data-oid="${item}"]`).prop("checked", true);
-            });
 
             this.staticEventHandlers();
         },
@@ -82,6 +91,9 @@ define([
         manageComparison: function(evt) {
             var oid = evt.target.dataset.oid;
             compare.changeComparison(oid);
+            if(compare.compareResult) {
+                window.location.hash = `#compare/${compare.oidsList.join("/")}`;
+            }
         },
 
         editMetrics: function(evt) {

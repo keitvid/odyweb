@@ -20,6 +20,7 @@ define([
         fieldComparators: fieldComparators,
         report: [],
         titles: [],
+        compareResult: null,
 
         doCompare: function() {
             var data = storage.getState("metrics_list");
@@ -47,7 +48,8 @@ define([
                 }
             }
 
-            this.doTableCompare();
+            this.compareResult = this.doTableCompare();
+            return this.compareResult;
         },
 
         doTableCompare: function() {
@@ -69,6 +71,7 @@ define([
                     if(!t) {
                         reportItem.validations.push({
                             message: "Unexistant table",
+                            severity: "danger",
                             result: false
                         });
                     }
@@ -77,6 +80,7 @@ define([
                 this.tableComparators.forEach((comparator) => {
                     reportItem.validations.push({
                         message: comparator.validationMessage,
+                        severity: comparator.severity,
                         result: comparator.compare(tables)
                     });
                 });
@@ -112,6 +116,7 @@ define([
                     validations: this.fieldComparators.map((compare) => {
                         return {
                             message: compare.validationMessage,
+                            severity: compare.severity,
                             result: compare.compare(cols[key])
                         }
                     })
@@ -125,6 +130,7 @@ define([
 
         changeComparison: function(oid) {
             var found = false;
+            this.compareResult = null;
             for(var i = 0; i < this.oidsList.length; i++) {
                 if(this.oidsList[i] == oid) {
                     this.oidsList.splice(i, 1);

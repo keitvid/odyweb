@@ -5,6 +5,7 @@
 define([], function() {
     return {
         validationMessage: "Table became null",
+        severity: "danger",
         compare: function(tables) {
             var basicTable = tables[0],
                 val = basicTable.rows > 0,

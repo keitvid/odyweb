@@ -4,7 +4,8 @@
 
 define([], function() {
     return {
-        validationMessage: "Table became null",
+        validationMessage: "Field became null",
+        severity: "warning",
         compare: function(fields) {
             var basicField = fields[0],
                 val = this.checkVal(basicField),
@@ -20,9 +21,7 @@ define([], function() {
         },
 
         checkVal: function(field) {
-            return field.metrics.filter((item) => {
-                    return item.title == "Nulls Rate";
-                })[0] === "100%"
+            return field.sample.length > 0;
         }
     };
 });
