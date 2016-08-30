@@ -1,6 +1,16 @@
-<h3>Available metrics</h3>
+<h3>Available metrics <span class="pointer btnAddMetric" title="Add new"><i class="glyphicon glyphicon-plus"></i></span></h3>
 <ul>
     {{#each items}}
-        <li><a href="#{{title}}">{{title}}</a></li>
+        <li>
+            <input type="checkbox" class="chk-compare" data-oid="{{_id}}">
+            <a href="#{{_id}}/{{title}}">{{title}}</a>
+            <span class="pointer btnEditMetric" data-oid="{{_id}}" title="Change Settings"><i class="glyphicon glyphicon-edit"></i></span>
+            <span class="pointer btnDeleteMetric" data-oid="{{_id}}" title="Add new"><i class="glyphicon glyphicon-remove"></i></span>
+            <span class="pointer btnRefreshMetric" data-oid="{{_id}}" title="Refresh"><i class="glyphicon glyphicon-refresh"></i></span>
+            <br /><span class="metric-status">{{status}}</span>
+        </li>
     {{/each}}
 </ul>
+<div class="compare">
+
+</div>

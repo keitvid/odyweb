@@ -13,7 +13,7 @@ define([
         init: function() {
             var self = this;
 
-            $("body").html(hbs.compile(layout)({}));
+            $(".app-container").html(hbs.compile(layout)({}));
             navi.init();
 
             $(window).on("hashchange", function() {
@@ -23,7 +23,7 @@ define([
         },
 
         changeSchema: function() {
-            content.setSchema(window.location.hash);
+            content.setSchema(window.location.hash.split("/")[0], window.location.hash.split("/")[1]);
         }
     };
 

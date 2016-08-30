@@ -1,0 +1,62 @@
+<div>
+    <h1>Metrics comparison</h1>
+    <div>
+        Base metric: <strong>{{baseMetric}}</strong><br />
+        Metrics list: <ul>{{#each metrics}}<li>{{.}}</li>{{/each}}</ul>
+    </div>
+    <div>
+        <label><input type="checkbox" class="hide_success">Hide success</label>
+    </div>
+    {{#each table}}
+        <div class="compare-table">
+            <h3>Table: {{table}}</h3>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Validator</th>
+                    <th>Severity</th>
+                    <th>Result</th>
+                </tr>
+                </thead>
+                <tbody>
+            {{#each validations}}
+                <tr class="{{#if result}}success{{else}}{{severity}}{{/if}}">
+                    <td>{{message}}</td>
+                    <td>{{severity}}</td>
+                    <td>{{#if result}}<i class="glyphicon glyphicon-ok"></i>{{else}}<i class="glyphicon glyphicon-remove"></i>{{/if}}</td>
+                </tr>
+                </tbody>
+            {{/each}}
+            </table>
+
+            <div class="compare-columns">
+                {{#each columns}}
+                    <div>
+                        <h4>Field: {{../table}}.{{name}}</h4>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Validator</th>
+                                <th>Severity</th>
+                                <th>Result</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {{#each validations}}
+                                <tr class="{{#if result}}success{{else}}{{severity}}{{/if}}">
+                                    <td>{{message}}</td>
+                                    <td>{{severity}}</td>
+                                    <td>{{#if result}}<i class="glyphicon glyphicon-ok"></i>{{else}}<i class="glyphicon glyphicon-remove"></i>{{/if}}</td>
+                                </tr>
+                                </tbody>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+
+                {{/each}}
+
+            </div>
+        </div>
+    {{/each}}
+</div>

@@ -13,7 +13,8 @@
     "handlebars": "*",
     "bootstrap": "*",
     "requirejs": "*",
-    "requirejs-text": "*"
+    "requirejs-text": "*",
+    "fetch": "*"
   },
   "ignore": [
     "**/.*",
